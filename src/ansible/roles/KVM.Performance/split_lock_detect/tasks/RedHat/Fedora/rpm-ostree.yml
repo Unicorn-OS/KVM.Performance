@@ -1,0 +1,10 @@
+- name: split_lock_detect=off
+  ansible.builtin.shell: >
+    rpm-ostree kargs
+    --append-if-missing="split_lock_detect=off"
+  notify:
+  - rpm-ostree initramfs
+  - Reboot
+  when: split_lock_detect
+  become: true
+
